@@ -1,0 +1,13 @@
+===================================================================================================================
+SET UP
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+
+app = dash.Dash()// set up dash "canvas"
+app.layout = ...// layout of the page
+
+if __name__ == '__main__': //run as a module
+	app.run_server(debug = True)
+==================================================================================================
+VOCAB

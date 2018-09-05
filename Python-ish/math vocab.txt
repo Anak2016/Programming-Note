@@ -1,0 +1,56 @@
+Markov property
+	:Markov property reers to the memoryless propety of a stochastic process.
+	:A stocastic process has the Markov property if the conditional probability distribution of future states 
+	of the process( conditional on oth past and present states) depends only upon the present state, not on the sequence
+	of events that preceded it.
+Strong Markov property
+	:is similar to the Markov property, except that the meaning of present is defined in terms of a random variable called 
+	"Stopping time."
+Markov chain
+	:A discrete-time stochastic process that satisfying the Markov property.
+latent varialbes
+	:are variables that are unobserved. It's also called " hidden variables"
+Superpixel
+	: is an image patch whih is better aligned with intensity edges than a rectangular patch.
+	: can be extracted with any segmentation algorithm.
+Gibb distribution/blozman distribution 
+	:is a probability distibution/probability meansure/frequncy distribution of paritcles in a system over various
+	possible states. 
+	ex. temperature meansure by mean of kinertic energy.
+Markov random field 
+	: is a set of random variables having a markov property described by an undirected graph.
+mean field theory/ self-consistent field theory
+	:studies the behavior of large and complex stochastic model (large number of small individual components which interact with each other)
+	by studying a simpler model. The effect of all the other inidividual on any given inividual is approximated by a single averaged effect
+	to reduce a many-body problem to one- body problem.
+Random field
+	:is a generalization of a stochastic process such that the underlying parameter need no longer be a simple real 
+	or integer valued "time", but can instead take values that are multidimensional vectors, or points on some manifold
+Graphical Model/ Probabilistic Graphical Model(PM)
+	:is a probabilistic model for which a grpah expresses the conditional dependence structure between 
+	random variables. 
+inner product
+	:is used to combine vectors and gives out scalar. 
+	eg. dot product is a sebset of inner product. dot product reflect value of one vector on to another vector.
+hilton space
+	:space where each member can have infinitely many dimension but hte sum of value in all dimension must converge
+	to a positive integer.
+Gaussian kernel
+	:is used as a blur filter in convolution layer. intensity of each array in a kernel has Gaussian distribution.
+	where the more interested pixel (middle pixel) is assigned with higher number. 
+kernel trick
+	:is used to find inner product of vector without directly calculate value for all dimension (infinitely many)
+Iterative filters
+	:For the strict edge preservation, a single filter still results in large noise away from the edge. 
+	A repetitive application of the filter maybe useful to reduce the noise, leading to the idea of combining 
+	the filter with an iterative method
+Finding edge
+	1.color to grey scale conversion. (remove non-edge related information)
+	2.gaussian filter. (blur picture. remove high frequency noise, and maintain low frequency noise)
+ 	3.edge detector. 
+Bandwidth
+	:if a computation re-uses data, it will require less memory bandwith
+	Re-use can be accomplished by:
+	1. sending more inputs to be processed by the samew ieghts
+	2.sending more weights to process the same inputs.
+

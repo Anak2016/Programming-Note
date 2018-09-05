@@ -1,0 +1,21 @@
+To create new folder on Floydhub
+	floyd init quick-start
+
+command to link your jobs to "quick-start" FloydHub Project
+	floyd init username/folder
+		> floyd init terngoodod/quick-start
+
+run a job in this project
+		>floyd run <insert-command-here> 
+	# To use GPU 
+		>floyd run --gpu <insert-command-here> 
+	# To use a different environment (Keras TensorFlow Pytorch)
+		>floyd run --gpu --env pytorch <insert-command-here>
+	# To run in different mode (Jupyter Notebook, Serving (in Beta))
+		>floyd run --mode jupyter --env pytorch-0.2
+	# To run with command line mode
+		>eg. floyd run --env pytorch-0.2 "python train.py"
+	# To run tensorboard
+		>add --tensorboard to the end of the line 
+	#To add message
+		>add --message "any message."

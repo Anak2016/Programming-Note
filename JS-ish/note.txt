@@ -1,0 +1,24 @@
+====================================================================================================
+DATABASE 
+Associations
+	: one:one, one:many, and many:many relationships
+
+Embedding Data
+	:
+
+=====================================================================================================
+AUTHENTICATION
+
+	:hard way is too implement all by our self.
+	:easy way is to use pre-made tools 
+	:for Node.js, tools to implement Authentication is Passport.
+		>Passport is authenticatoin middleware for Node.js. 
+		>Passport can be unobstrucsively dropped in to any Express based web application
+		>Passport has over 300 strategies to implement auth.
+		>Passport-local is just for username and password
+		>Passport-local-mongoose is Passport-local built for mongoose.
+	link: http://www.passportjs.org/
+
+Session
+	:contain encoded info of user
+	:To implement in YelpCamp, we use Express-Session.

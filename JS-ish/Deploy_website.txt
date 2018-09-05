@@ -1,0 +1,60 @@
+Account detail for Mlab and heroku:
+username: awannaphasch2016@fau.edu
+password: awannaphasch2016@
+
+Mlab Database name for Yelpcamp
+username:YelpCamp
+password:Terng2258
+=============================================================================
+Question:
+Q:How does heroku work?
+Ans 	When you create an app, a git remote (called heroku) is also created 
+	and associated with your local git repository.
+
+Q:how to check name of heroku url?
+Ans 	on the personal website under "Personal"
+	eg floating-thicket-30849
+	when type the name in url add ".herokuapp.com" after the name
+	eg floating-thicket-30849.herokuapp.com
+
+Q:how to set local database and main database?
+Ans 	create environment variable, in the case of YelpCamp,
+	1. create environment variable for cloud9 local database.
+		>1.1 type "export VARIABLE = local_database"
+	2. create environment variable for heroku database
+		>2.1. type "heroku config:set VARIABLE= local_database"
+		>2.2 navigate to setting locate in heruko account and 
+		manually set Environment variable 
+	the logic is that use heroku database whenever heroku server is run.
+	This can be done by setting environment variable directly on heroku.
+===============================================================================
+HEROKU
+
+COMMAND LINE
+
+heroku login
+	:to login
+heroku create
+	:link source code to heroki
+	Note:Create an app on Heroku, which prepares Heroku to receive your source code.
+heroku log
+	:display log
+	Note: used mostly for degging because the error doesn't show on the browser.
+git push heroku master
+	:push changes to heroku remote
+heroku run "any command"
+	:run command on heroku
+	eg. heroku run ls -> show all file on heroku remote
+	    heroku run ls node_modules -> show all modules that has been installed.
+	note: we can also install module directly to heroku
+	eg. heroku run npm install mongoose --save
+export DATABASEURL = "url of database"
+	: 
+--------------------------------------------------------------------------------
+NOTE
+
+:heroku must be used with github
+
+:must have 2 database 1.main database 2.test database
+=================================================================================
+MongoLab or Mlab

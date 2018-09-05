@@ -1,0 +1,149 @@
+QUESTIONS
+Q: Difference between find and findOne?
+	Ans A find query returns a cursor (no operation scenario), so no data is returned.
+		On the other hand, findOne returns the data and closing the cursor.
+		Therefore, find is find is faster than findOne because it only returns cursor.
+
+Q: Mongoose vs MongoDB
+	Ans 
+		in terms of Node.js Mongodb is the native driver for interacting with mongodb
+		instance. mongoose is an Object modeling tool for MongoDB.
+######################################################################################
+Basic Setup 
+
+var mongoose = require("mongoose")
+mongoose.connect("mongodb://localhost/blog_demo")//blog_demo is database name
+
+var userSchema = new mongoose.Schema({
+
+    	email: String,
+	name: String
+
+});
+
+var User = mongoose.model("User", userSchema);
+
+
+var newUser = new User({
+
+    email: "charlie@brown.edu",
+
+    name: "Charlie Brown"
+
+});
+
+newUser.save(function(err, user){
+
+   if(err){
+        console.log(err)
+
+    }else{
+
+        console.log(user);
+    
+}
+});
+
+----------------------------------------------------------------------------------------
+one to many schema
+**************************************
+var userSchema = new mongoose.Schema({
+
+    	email: String,
+	name: String
+.
+	//assume postSchema exists
+	post: [postSchema]
+});
+
+
+var User = mongoose.model("User", userSchema);
+
+var newUser = new User({
+	email: "hermione@hogwarts.edu",
+	name: "Hermione Granger"
+});
+
+//push postShema into var post of newUser
+newUser.posts.push({
+
+    title: " How to ",
+
+    content: "Just Kidding"
+
+});
+
+//Object Reference version of the above schema
+var userSchema = new mongoose.Schema({
+
+    email: String,
+
+	name: String,
+
+	posts: [{
+
+	            type: mongoose.Schema.Types.ObjectId,
+
+	            ref: "Post"
+
+	        }
+]
+
+});
+
+//push post to Object Reference (reference to id)
+Post.create({
+	title: "something",
+	content: "haha"
+},function(err, post){
+	//User = mongoose.model("user", UserSchema)
+	User.findOne({email: "existing email"}, function(err,foundUser){
+		foundUser.posts.push(post); //push only id to database as reference
+	}
+}
+######################################################################################
+VOCAB
+
+	//Assume User = mongoose.model("User", userSchema);
+User.findOne({name: "hermione Granger"}, function(err, user){}
+	:find name: "hermione Granger" in User database (contains all userSchemas).
+
+user.find
+	: return cursor to data in database 
+
+user.findONe
+	: return data from database.
+
+User.findOne({}).populate("database name").exe(function(err,use)
+	: return all data including data within "database name" ( recursive return)
+
+module.export
+	: export module
+
+var.remove({})
+	:remove element form database
+
+var.create(newName, function)
+	:create database and give it a new name
+---------------------------------------------------------------------------------------
+console
+
+mongo:
+	: start mongoDB
+
+show dbs:
+	: show database name
+
+use "dbs name"
+	: open dbs name
+
+db.users.find()
+	:find all data in the database
+
+show collections
+	:show all element in database
+
+######################################################################################
+NOTE
+
+	:Always save changes made to databse eg. push 

@@ -1,0 +1,54 @@
+QUESTION
+
+Q: What is Processes?
+	Ans 
+		Processes carry out tasks within the os. 
+		
+		note: A program is a set of machine code instrctuions and data stored in an executable image on disk.
+				> A program is a passive entity 
+				> Processes is an active entity
+
+Q: What is subprocess?
+	Ans 
+	 	a child process, i.e. a process that has been launched by its parent (which make it a subprocess.)
+
+Q: What is Shell Variable and environment Variable?
+	Ans
+		A shell variable is a variable that is available only to the current shell.
+		an environment variable is available system wide and can be used by other application on the system. (refered to as system variable in window?)
+Q: What is an interactive shell (or shell)?
+	Ans
+		An interactive shell is a command line interpreter reading your input line by line and prompting you when a command is done.
+
+Q: What is bash program (or shell script)? 
+	Ans
+		it reads its commands not form your keyboard but from a text file containing them.
+
+Q: What is terminal?
+	Ans
+		terminal is nothing but shell. for example, Unix provides different flovors of shells.
+			Unix has: Bourne shell (sh), C shell (csh), TC shell(tcsh), Korn shell(ksh), Bourne Again Shell(bash)		
+
+Q: How to check my current terminal shell?
+	Ans
+		use "echo $0"
+		note:
+			0 is the name of the running process. 
+				>If you use it inside of a shell then it will return the name of the shell
+				>If you use it inside of a script, it will be the name of the script.
+####################################################################################################################
+VOCAB
+protoc
+	:Generate Protocol Buffer from "object_detection/protos/*.proto" to "current directory"
+	eg: protoc object_detection/protos/*.proto --python_out=.
+		note:
+			:--python_out produce python output and place it in GIVEN directory in this case "current directory"
+
+export
+	:export makes the variable available to sub-processes.
+	
+	eg. export name = value
+		> means that the variable "name" is availble to any process you run from that shell process.
+####################################################################################################################
+NOTE
+	

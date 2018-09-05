@@ -1,0 +1,31 @@
+
+Blobs
+	:is the standard array and unified memory interface for the framework. 
+	:it describes how info is store and communicated in and across layers and nets.  
+Layers
+	:is a foundation of both model and computation.
+Nets
+	:is a collection and connection of layers 
+
+====================================================
+note:
+	=>Caffe defines a net layer-by-layer in its own model schema.
+	=>Caffe stores, communicates, and manipulates the info as "blobs" 
+	as data and derivatives flow through the network in forward and backward passes
+
+cmake -G"!CMAKE_GENERATOR!" ^
+      -DBLAS=Open ^
+      -DCMAKE_BUILD_TYPE:STRING=%CMAKE_CONFIG% ^
+      -DBUILD_SHARED_LIBS:BOOL=%CMAKE_BUILD_SHARED_LIBS% ^
+      -DBUILD_python:BOOL=%BUILD_PYTHON% ^
+      -DBUILD_python_layer:BOOL=%BUILD_PYTHON_LAYER% ^
+      -DBUILD_matlab:BOOL=%BUILD_MATLAB% ^
+      -DCPU_ONLY:BOOL=%CPU_ONLY% ^
+      -DCOPY_PREREQUISITES:BOOL=1 ^
+      -DINSTALL_PREREQUISITES:BOOL=1 ^
+      -DUSE_NCCL:BOOL=!USE_NCCL! ^
+      -DCUDA_ARCH_NAME:STRING=%CUDA_ARCH_NAME% ^
+      -DCMAKE_C_COMPILER=cl.exe ^
+      -DCMAKE_CXX_COMPILER=cl.exe ^
+      "%~dp0\.."
+	

@@ -1,0 +1,20 @@
+container
+	:fixed width container
+
+container-fluid
+	:container can expend to fill the available width
+
+<hr>
+	:add empty horizontal space 
+	note:stand for "horizontal row" 
+=======================================================================
+Useful bootstrap for styling YelpCamp project
+
+List-group
+	: style list of text 
+
+thumbnail (depreciated) 
+	: picture placeholder
+
+caption (replace thumbnail)
+	: picture caption

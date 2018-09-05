@@ -1,0 +1,6 @@
+=================================================================================
+COMMAND
+
+WHERE "file/folder"
+	:show absolute path to file/folder
+	note: in Unix, which "file/folder"

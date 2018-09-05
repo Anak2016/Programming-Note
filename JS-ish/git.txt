@@ -1,0 +1,18 @@
+==============================================================================
+Git Command
+
+git init
+	
+git status
+
+git add 
+
+git commit
+
+git log
+
+git checkout
+	:switch git branches or switch to previous log point
+git remote -v
+	:check all remotes in git repo
+	note: it shows which remote to push changes to 

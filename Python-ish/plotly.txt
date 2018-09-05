@@ -1,0 +1,17 @@
+==========================================================================================
+Question:
+What is Plotly used for?
+Ans	Plotly offers six main products
+	1. Visualize Data
+		:has a graphical user interface for importing and analyzing data into a gride and usign stats tools	
+		note: mainly used to make creating graphs faster and more efficient
+	2. API libraries for Python, R, MATLAB, Node.js, Julia, and Arduino and a REST API.
+		note: Plotly can also be used to style interactive graphs with IPython
+	3. Figure Covnerters
+		note: convert matplotlib, aggplot2, and IGOR Pro graphs into interactive, online grpahs
+	4. Plotly Apps for Google Chrome
+	5. Plotly.js 
+		:open source for javascript
+	6. PLotly Enterpise
+		: an on--premises installation of Plotly
+==========================================================================================

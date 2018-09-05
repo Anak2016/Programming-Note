@@ -1,0 +1,55 @@
+Question:
+
+Tkinter vs PyQt?
+Ans	for simple chart, choose Tkinter. (less learning curves)
+	for more complicated chart, choose PyQt.
+	
+What is 6 Best Python GUI Frameworks?
+Ans 	1.Kivy 2.PyQT 3.Tkinter 4.WxPython 5.PyGUI 6.PySide
+
+what is visualization library that I should know about?
+Ans	1.Pandas 2.Seaborn 3.ggplot 5. pygal 6.Plotly
+	Pandas  -> works with tabulet data mainly, but is compatible with most of visualization library.
+	Seaborn -> is built on top of matplotlib 
+	ggplot  -> similar to Seaborn. it is built on top of matplotlib, but it diverges from seaborn in that
+		   it is a port of ggplot2 from R
+	pygal	-> is used for creating svg charts. It is useful for interactive charts. 
+		   It also easy to create unique looking chart from other choices. 
+		(smoother visualization [not clear pixel])
+	Plotly  -> is  an online tool for doign analytics and visualization. It has a robust API that support many language including Python.
+
+real time interactive python framework? (mostly used in web browser) 
+Ans  	1.Bokeh 2.dash
+	Bokeh is not a wrapper of matplotlib (not sure what its core library is)
+	Dash is a wrapper of plotly
+What is Kivy?
+Ans 	Kivy is an OpenGL ES 2 accelerated framework for creation of new user interfaces. 
+	It supports multiple platforms namely Windows, MacOSX, Linux, Android iOS and Raspberry Pi.
+	It is open source and comes with over 20 widgets in its toolkit.
+
+What is PyQT?
+Ans	it is a cross-platform Python binding implementing the Qt library for the Qt application develpoement framework.
+	note: as of 9-1-2018, available for Unix/Linux, Windows, Mac OS X and Sharp Zaurus.
+
+What is Tkinter?
+Ans 	it is commonly bundled with Python, using Tk and is Python's standard GUI framework. 
+	It is popular for its simplicity and graphical user interface.
+	note: Since it comes by default, there is an abundance of resources, both codes and reference books. 
+	    : Community is also active.
+
+What is WxPython (previously known as WxWindows) ?
+Ans	it is an open source wrapper for cross platform GUI library WxWidgets and implemented as 
+	Python extension module. 
+	note: with WxPython, you can create native application for Windows, Max OS and Unix.
+
+What is Qt?
+Ans 	At is a cross-platform application framework and widget toolkit for creating classic and embedded graphical user
+	interfaces, and applications that run on various software and hardware platform
+=========================================================================================
+Note:
+
+:a Native application is a software program that is developed for use on a particular platform or device
+	eg. example of native app are preinstalled app on Mac and PC. (Instant update to the newest version)
+	note: Opposite to web apps and mobile cloud apps that are developed to be generic 
+		across multiple systems.	
+

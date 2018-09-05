@@ -1,0 +1,478 @@
+QUESTION
+What is DOM?
+Ans 	DOM is a W3C (World Wide Web Consortium) standard. The DOM defines a standard for accessing documents
+	"The W3C Document Object Model (DOM) is a platform and language-neutral interface that allows programs 
+	and scripts to dynamically access and update the content, structure, and style of a document."
+
+What is Front-End Frameworks?
+Ans 	>JS libraries that handle DOM manipulation
+	>Handles navigations (HTML5 push state)
+	>State management
+	>alwasy run on a client side
+	eg. React is a Front-End Framework
+
+================================================================================================================
+VOCAB	
+
+var.forEach()
+	eg. 
+	var.forEach( funtion(var_1){
+		//do something.	
+	})
+	forEach(arr, function(var_1){//assuming that arr is iterable
+		//do something.
+	})
+
+findIndex
+	:returns the index of the first element in the array for which the callback
+	returns a truthy value. -1 is returned if the alledback never returns a
+	truthy value.
+
+debugger
+	:pause running program at "debugger" line
+
+someVar.slice()
+	:slice method create copy of "someVar"
+
+"use strict"
+	:turn on "strict" mode. This means that global variable, objects, functions, cannot be defined inside functions
+	note: turn on strict mode to prevent mistakenly declaring global variable within a function
+	eg
+		"use strict"
+		console.log(this); // window
+		function whatIsThis(){
+			return this;
+		}
+		whatIsThis(); //undefined
+
+Array filter() Method 
+	:the filter() method creats an array filled with all array elements that pass a test (provided as a funtion).
+	note: filter() does not execute the function for array elements wituout values
+	note: filter() does not change the original array. 
+
+reduce() method
+	:it reduces the array to a single value
+	note: it executes a provided function for each value of the array (from left-to-right)
+	note: the return value of the function is stored in an accumulator (result/total).
+	eg.
+	var numbers = [15.5, 2.3, 1.1, 4.7];
+	function getSum(total, num) {
+    		return total + Math.round(num);
+	}
+	function myFunction(item) {
+		//return sum of number, in this case, 24
+    		document.getElementById("demo").innerHTML = numbers.reduce(getSum, 0); 
+	}
+	
+splice() method
+	:changes the content of an array by removing existing elements and/or adding new elements
+	note: it modifies original array.
+	eg.
+	var months = ['Jan', 'March', 'April', 'June'];
+	months.splice(1, 0, 'Feb'); //insert at position 1; replace 0; value = 'Feb'
+	console.log(months)//Array ["Jan", "Feb", "March", "April", "June"]
+	
+	months.splice(4,1, 'May') //insert at position 4; replace 1; value = 'May'
+	console.log(months)// Array ["Jan", "Feb", "March", "April", "May"]
+	
+
+============================================================================
+JS FUNCTION AND ITS ARGUMENT
+note: SHOW COMMONLY USED FUNCTION AND ITS ARGUMENT
+function forEach(array, callback){}
+
+function callback(curElement, currentIndex, array){}
+
+funtion findIndex(array, callback){}
+===========================================================================
+ES2015 and some note
+
+Clousers and the Keyword 'this'
+
+Closure
+	: a closure is a function that makes use of variables defined in outer functions that have previously returned.
+
+Inner function
+	:it does not remember everything from the outer function. it only remember what it needs
+
+'this' keyword 
+	:can be determined using four rules (global, object/implicit, explicit, new)
+	[1]Global
+		: global rule applies unless the keyword this is inside of a declared object.
+	[2]Implicit/Object
+		: when inside of a declared object the value of the keyword this will always be the cloest parent object.
+		: A keyword "this" is defined when a function is run. (No function in an object, this will return to window.)
+		eg.
+		var person = {
+			firstname: "Elise",
+			sayHi: function(){
+				return "Hi" + this.firstName; //this refer to closest obj, Person.
+			},
+			determineContext: function(){
+				return this === person;
+			}
+		}	
+	[3]Explicit Binding
+		:choose what we want the context of 'this' to be usign call, apply or bind
+	Name of method  | Parameters 		| invoke immediately?
+	Call		| thisArg, a,b,c,d,...  | Yes
+	Apply		| thisArg, [a,b,c,d,..]	| Yes
+	Bind		| thisArg,a,b,c,d,..	| No
+	
+	eg.
+		var person = {
+			firstname: "Colt",
+			sayHi: function(){
+				return "Hi" + this.firstName; //this refer to closest obj, Person.
+			},
+			determineContext: function(){
+				return this === person;
+			}
+			dog: {
+				sayHello: function(){
+					return "Hello" + this.firstName;
+				},
+				determineContext: function(){
+					return this === person;
+				}
+			}
+		}
+		person.dog.sayHello() // "Hello undefined" 
+		person.dog.detereminedContext() // false
+		reason: Because this refered to the closest obj, in this case "dog"
+
+		call() method
+			:person.dog.sayHello.call(person); // "Hello Colt"
+			:person.dog.detereminedContext().call(person) // true
+			eg 
+			usecase with Call
+			Goal = find all the divs taht have the text "Hello" using filter
+			var divs = documents.getElementsByTagName('div'); //cant use filter because divs is not an array 
+			var divsArray = [].slice.call(divs) 
+			//not using empty array, but set 'this' target to divs and create a slide of divs arrays.
+			divsArray.filter(function(val){
+				return val.innerText === 'Hello':
+			});
+			
+			
+		apply() method
+			:When a function does not accept an array, apply will spread out values in an array for us!.
+			eg.
+			use case with Apply
+			[1]var nums = [1,2,3,4]
+			Math.max(nums); // NaN
+			Math.max.apply(this, nums)// this refers to Math. 
+			
+			[2]function sumValues(a,b,c){
+				return a+b+c;
+			}
+			var values = [4,1,2];
+	
+			sumValues(values); //"4,1,2undefinedundefined"
+			sumValues.apply(this, [4,1,2]); // 7 ; this refers to sumValues
+	
+		bind() method
+			:the parameters work like call, but blind returns a function with the context of 'this' bound already!
+			note: this means that, with bind, we do not need to know all the arguments up front.
+			note: it is used with asyncronous code or when value of arguments is unknown until later time 
+			eg. use bind with setTimeout() // function of window because it is called independent of the obj that contains it.
+			eg.
+			function addNumber(a,b,c,d){
+				return this.firstName + " just calculated " + (a+b+c+d);
+			}
+			var elie = {
+				firstName: "Elise"
+			}
+			var elieCalc = addNumbers.bind(elie,1,2,3,4); // function() {..}
+			elieCalc(); // Elise just calculated 10		
+			var elieCalc = addNumber.bind(elie,1,2);// function(){..}
+			elieCalc(3,4)// Elise just calculated 10
+		
+	[4]the 'new' keyword
+		:We can set the context of the keyword ' this' using the 'new' keyword 
+		eg. 
+		function Person(firstName, lastName){
+			this.firstName = firstName; // var of window
+			this.lastName = lastName; // var of window
+		}
+		var elise = new Person("Elie", "Schoppik"); //attach this to new
+		elise.firstName // "Elise"
+		elise.lastName // "Schoppik"
+window object
+	:it represetns the broser's window. All global JS objects, functions, and variables automatically become 
+	members of the window object 
+
+object in javascript
+	:Objects are variables that can contain many values.
+	note: in Java, object is an instance of a class. 
+	eg.
+		//declar object car 
+		var car = {type: "Fiat", model:"500, color:"white"};
+
+Default Parameters
+	:set value to default if not assigned new value
+	eg.
+	function add(a =10 , b = 20){
+		return a+b;
+	}
+	add(); //30
+	add(20); //40 because a =20 b = 20 
+
+For of statement 
+	:creats a loops iterating over iterable objects, including built-in String,Array, Array-like object (eg. arguments or NodeList),
+	TypedArray, Map,Set, and user-defined iterables.
+	note: it is used with let 
+	eg. 
+	var x = [1,2,3]
+	for(let o of x){
+		console.log(o);// print 1 2 3
+	}
+
+For in statement
+	:used to loop over keys in an object.
+
+Array-like Objects
+	:Array-like objects lok like arrays. They have various numbered elements and a length property.
+	note. it does not have any of Array's functions, and use for-of.
+	:arguments, documents.getElementsByTagName(), document.forms, and basically every other DOM method and property that gives a list of items.
+
+Rest operator (called Rest when '...' is used in function arguments
+	: The rest always retuns an array 
+	note: it is an array. while argument is array-like object.
+	eg.
+	function printRest(a,b,...c){ // ... activate Rest
+		console.log(a)
+		console.log(b)
+		console.log(c)
+	}
+	printRest(1,2,3,4,5) 
+	//1
+	//2
+	// [3,4,5]
+	
+	iterate through argument
+	[1] ES5
+	function sumArguments(){
+		var total = 0;
+		for(var i =0; i <argument.length ; i ++){
+			total += arguments[i];
+		}
+		return total;
+	}
+	[2] fancy ES5
+	function sumArguments(){
+		var argumentsArray = [].slice.call(arguments);
+		return argumentArray.reduce(function(accumulator, nextValue){
+			return accumulator + nextValue;
+		});
+	}
+	[3] ES6/ ES2015
+	var sumArguments = (..args) => args.reduce((acc,next)=> acc+next );
+
+Spread (called Spread when '...' is used outside function's parameters)
+	:Used on arrays to spread each value out (as a comma separated value)
+	note: useful when you have an array, but you are working with expects comma separated values
+	eg.
+	without using spread 
+	var arr1 = [1,2,3]
+	var arr2 = [4,5,6]
+	var combined = arr1.concat(arr2);
+	
+	with Spread
+	var combined = [...arr1,...arr2]
+
+Object Shorthand Notation
+	:if the keys and valus have the same name, we do not have to repeat
+	eg. 
+	[1] ES5
+	var firstname = 'Elie';
+	var instuctor = {firstname:firstname;}
+	[2] ES2015
+	var instructor = {firstname;}
+
+Object Method
+	eg.
+	[1] ES5
+	var instructor = {
+		sayHello: function(){
+			return "Hello";
+		}
+	}
+	[2] ES2015
+	var instructor = {
+		sayHello(){
+			return "Hello";
+		}
+	}
+
+Computed Property Names
+	:allow access to var value as object's key
+	[1] ES5
+	var firstName = "Elise";
+	var instructor = {}
+	instructor[firstName] = "It's me"
+	instructor.Elise // "It's me"
+
+	[2] ES2015
+	var instructor = {
+		[firstname] : "It's me"
+	}
+	instructor.Elise // "It's me"
+
+Object Destructuring
+	:Extracting values from data stored in objects and arrays
+	note: assigned to {} indicates destructured object.
+	eg.
+	[1] ES5
+	var instructor = {
+		firstName: "Elise"
+	}
+	var firstName = instructor.firstName
+	[2] ES2015
+	var {firstName} = instructor // create var named "firstName"
+	var {firstName:first} = instuctor // rename firstname to first
+
+	Passing in function parameters
+	[1] ES5
+	function createInstructor(options){
+		var options = options || {};
+		var name = options.name || {first: "Anak", last: "Lane"}
+		var isHilarious = options.isHilarious || false;
+		return [name.first, name.last, isHilarious]
+	}
+	[2] ES2015
+	function createInstructors({name: {first:"Anak", last: "Lane"}, isHilarious = false} = {}){
+		return [name.first, name.last, isHilarious]
+	}
+
+	Object fields as parameters
+	[1] ES5
+	var instructor = {
+		name: "Elise",
+		fav: "Purple"
+	};
+	function displayInfo(obj) {
+		return [obj.name, obj.fav];
+	}
+	displayInfor(instructor);
+
+	[2] ES2015
+	function displayInfo({name, fav}) {
+		return [name, fav];
+	}
+	displayInfor(instructor);
+
+Array Destructuring
+	:similar to Object Destructuring but use [] instead of {}
+	usecase of Array Destructuring: Swapping Values
+	[1] ES5
+	function swap(a,b){
+		var temp = a;
+		a = b;
+		b = temp;
+		return [a,b];
+	}
+	swap(10,5); // [5,10]
+	
+	[2] ES2015
+	function swap (a,b){
+		return [a,b] = [b,a];
+	}
+	swap(10,5) // [5,10]
+
+'class' keyword
+	:is introduced to mimic object oriented programming 
+	note: cannot be recreated.
+	note: must used 'new' keyword to instantiate a class.
+	eg. 
+	[1] ES5
+	function Student(firstName, lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	var elie = new Student('Elie', 'Schoppik');
+	[2] ES2015
+	Class Studnet{
+		constructor(firstName, lastName){
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+	}
+	var elie = new Student('Elie', 'Schoppik');
+
+prototype property
+	:All js obj inherit properites and methods from a prototype
+	note: Shared method and properties are contained in the fucntion's prototype property.
+	note: prototype property allow you to add new properties to existing obj including methods and var.
+
+Static (in JS)
+	:in JS, static is a member of a class but is not a member of class instance (or object).
+	: it is a "Class Methods" not "Class.prototype Method"
+
+Inheritance
+	:Passing along method form one class to another.
+	eg
+	[1] ES5
+ 	function Person(firstName, lastName){
+		this.firstName =firstName;
+		this.lastName  =lastName;
+	}
+	Person.prototype.sayHello(){
+		return "Hello" + this.firstName + " " + this.lastName;
+	}
+	function Student(firstName, lastName){
+		this.firstName =firstName;
+		this.lastName  =lastName;
+	}
+	student.prototype = Object.create(Person.prototype); 
+	student.prototype.constructor = Student; 
+	//Student inherits method from Person. (include both class.prototype properties and class properties)
+	[2] ES2015
+	class Person{
+		constructor(firstName, LastName){
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		sayHello(){
+			return 'Hello ${this.firstName} ${this.lastName}';
+		}
+	class Student extends Person{...}
+
+Super keyword 
+	:used when a mthod by the same name is implemented in the parents class
+	eg.
+	[1] ES5
+	function Person(firstName, lastName){
+		this.firstName =firstName;
+		this.lastName  =lastName;
+	}
+	Person.prototype.sayHello(){
+		return "Hello" + this.firstName + " " + this.lastName;
+	}
+	function Student(){
+		Person.apply(this, arguments)
+	}
+	[2] ES2015
+	class Person{
+		constructor(firstName, LastName){
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		sayHello(){
+			return 'Hello ${this.firstName} ${this.lastName}';
+		}
+	class Student extends Person{
+		constructor(firstName, lastName){
+			super(firstName, lastName);
+		}
+	}
+
+Maps (called "hash mpas' in other languages)
+	note:Similar to object, except pthe keys can be ANY data type!.
+	note:Created using the 'new' keyword 
+
+===========================================================================
+Hotkey
+
+Crtl + O
+	: search for file name in all direction in Cloud9

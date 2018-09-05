@@ -1,0 +1,13 @@
+Mnist data
+	:traing 60,000 examples and a test set 10,000 example subset of larget set Nist
+	:imgs are size-normalized and centered in a fixed size image.
+	:image were centered in a 28x28 by COMPUTING CENTER OF MASS
+	
+	Files Format for the Mnist Database
+		[offset] [type] [value] [description (label or pixel)]
+
+Getting Img from online img source
+	1. download labelImg
+	2. use labelImg to get .xml file 
+	3. convert .xml to TFRecord file to be imported in tensorflow
+	4. 

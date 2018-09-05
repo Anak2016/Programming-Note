@@ -1,0 +1,134 @@
+Unanswer Question
+Q: Assuming all vars are known what is this mean [binList[letter] for letter in message]?
+	:[] indicates that it will output a list
+#######################################################################################3
+Question
+Q: How to convert input binary to text python?
+	Ans example below:
+		st = "hello world"
+		''.join(format(ord(x), 'b') x in st) //return bit representation of "hello world"
+
+Q: unicode vs ascii
+	Ans Unicode is a superset of ASC, and the numbers 0-128 have the same meaning.
+
+Q: What is ASCII?
+	Ans ASCII uses 7 bits to represent a character 2^7 = 128 characaters.
+
+Q: What is UTF-8? 
+	Ans It stands for Unicode (or Univeral Coded Character Set) Transformation Format - 8 bit.
+		note: number follow UTF indicate bit's length
+		note: other type of Unicdoe Transformation Format include the follwoing
+			UTF-1,UTF-7,UTF-8,UTF-16,UTF-32,UTF-EBCIDC
+Q: What is export path command do?
+	Ans The shell shall give the export attribute tothe variables corresponding to the specidied names,
+		which shall cuase them to be in the environment of subsequently executed commands. if the name 
+		of ta variables is followd by = word, then the value of that variable shall be set to word.
+
+Q: What is the use of environment variables?
+	Ans An environment variable is a dynamic-named value that can affect the way runnign processes will behanve
+		on a computer. They are part of the environment in which a process runs.
+
+Q: What is the PATH environment variable?
+	Ans PATH is an environment vairalbe on Unix-like operating systems, DOS, OS/2 and Microsoft Windows,
+		:specifying a set of directories where executable programs are located. In general, each executing 
+		process or user session has its own PATH setting. 
+
+Q: What is POSIX
+	Ans stands for The POrtable Operating System Interface (POSIX). 
+		It is a standards specified by the IEEE computer society. for maintianing compatibility between os.
+		POSIX defines the application programming interface (API), along with the command line shells and 
+		utility interfaces, for software compatibility with variants of Unix and other os.  
+#####################################################################################3
+%matplotlib inline
+	:sets the backend of matplotlib to the 'inline' backend.
+	:with this backend, the output of the plotting commands is displyed inline with frontend like the
+	Jupyter notebook, directly below the code cell that produced it.
+	:it is then stored in the notebook documents.
+magic function
+	:is function that can be called with a command line style syntax.
+	there are 2 types of magic functions: line magics and cell magics
+line magics
+	:is prefixed with the % character and work much like OS cammand line calls
+	:they get an arguemtn the rest of the line.
+	:line magics acan return resutlts
+Cell magics
+	:are prefixed with a double %%.
+	:they get an argument not only the rest of the line but also the lines below 
+	it in a separate argument
+OS module
+	:provides a way of using os depende functionality
+	:it allows user to interface with the underying operating system that Pythong is runing on
+	eg Window, Mac or Linux
+sys module
+	:provides info about constants, functions, and methods of the Python interpreter.
+lmdb (python)
+	:is a type of database available in python
+cat
+	:show a file's content with no paging and stopping.
+toBinary(var)
+	:covert a string to binary
+ord(c)
+	:retur an interger representing the Unicode code point of the character (bytearray obj)
+
+assert 
+	:An expression is tested and if the rsult comes up false, and exception is raised
+	eg assert i == value
+help()
+	:use in debugging to see iheritance of the class tree. Attribute taht the class inherite from. etc
+
+__repr__(self)
+	:use in class to print out the "code" representation of the class
+	note: it is a Dunder methods (special method)
+
+__str__(self)
+	:use in class to print out the string representation of the class
+	Note: it is a Dundle methods
+	Note:__str__ is called before __repr__ if both are define.
+
+########################################################################################
+Hotkey
+in jupyter notebook
+
+shift:
+	:show method of a function
+
+shift + tap:
+	:show arugment
+?function
+	:show documentation of the function
+	note: these function must be imported
+
+??function
+	:show source code of the function
+h:
+	:display keyboard shortcut
+########################################################################################
+VOCAB
+type("var")
+	:show var type
+	eg dictionary, array, object etc
+"key" in "dictionary"
+	:return true if key is in dictionary if not return false
+########################################################################################
+NOTE
+
+Bytes, Bytearray Python
+	:Python spuports a range of types to storre sequences. 
+	:There are 6 sequence types: 
+		:string, btye sequences (bytes obj), byte arrays( bytesarray objs), lists, tuples, and range objs.
+	Bytes vs Bytesarray
+		Bytes 
+			>is an immutable sequence of small intergers in the range 0 <= x <256, print as ASCII characters when displayed
+			>it has the same methos as Bytesarray		
+		Bytesarray 
+		 	>is an immutable sequence of small intergers in the range 0 <= x <256, print as ASCII characters when displayed
+
+Export path command 
+	:explicity use export has the same effect as implicitly use export because it is built in
+		note: to force all variables to automatically export you must add set -a above all var you wish to have effect over
+		note: set -a = set | set +a = unset 
+########################################################################################
+Common Error
+
+Error: Name 'raw_input' is not define
+	Sol raw_input is changed to input from python 2 to python3 

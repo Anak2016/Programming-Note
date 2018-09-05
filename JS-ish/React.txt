@@ -1,0 +1,141 @@
+==============================================================================================
+QUESTION
+What is React?
+Ans	>Release by Facebook in 2013
+	>A view library that uses composable components
+	>Commonly used with libraries
+
+What is Transpiler?
+Ans	Transpiler converts from one source code version to another.
+	eg Babel is Transpiler.
+
+What is Babel?
+Ans 	>it is transpiler.
+	>in React, it helps convert JSX to Vanilla JS
+
+What is Webpack?
+Ans	>A module bundler for modern JS applications 
+	>Combines different JS files into a bundle.js (faster loading speed)
+	>Has a plugin system to run tools like babel. Run Babel before we ever deliver JS code to the client. (faster)
+	>Also bundles other assets like css. images, etc.
+
+What is State?
+Ans 	Stateful data. Data in our application that can change.
+
+What is Pure function?
+Ans	>a function with no side effects.
+	>It does not modify its inputs.
+	note:It must be repeatable (same inputs, same outputs)
+	eg. 
+	function addJob(personObj, job){
+		return Object.assign({}, personObj, {job}); //return copy obj of personObj
+	}
+	
+	or we can use Spread
+	function addJob(personObj, job){
+		return {...personObj, job}// return new object.
+		//note that job above is same as job:job (same name)
+	}
+
+How is State Shared?
+Ans	>State is always passed from a parent down to a child component as a 'prop'
+	>State should not be passed to a sibling or a parent
+	note: State should be owned by 1 component
+
+What is Statless Functionall Components?
+Ans 	>Components implemented using a function, not a class.
+	>The function implements the render method only no constructor, no state. 
+	note: in a long run, it provides performance benefit.
+	eg.
+	use function instead of class
+	const Greeting = props => (
+		<h1> Hello, {props.name}</h1>
+	);
+	Greeting.propTypes = {
+		name: PropTypes.string
+	};
+	
+==============================================================================================
+React Component
+
+
+==============================================================================================
+JSX
+:All JSX tag must be closed.
+
+:style takes JS obj. (not css obj)
+===============================================================================================
+Props
+:Props are Immutable
+
+:accessible in your components as an object called: this.props
+
+:create props (in JSX )
+	eg.
+	<ShowText text = "this is a prop named text" />
+
+PropTypes
+	:check types of props.
+	note: useless in production, but useful in developement env because its easier to debug
+	eg.
+	var: PropTypes.arrayOf(PropTypes.string).isRequired
+		>gives warning when return false.
+===============================================================================================
+State
+
+:all changes in this.state should be pure (function). (data remain the same)
+
+:new render with different value to the original -> new values are reassigned -> render page to pass new value
+	note: this is workflow for shared state.
+		eg. states that are passed to children from parent.
+
+setState
+	:The correct way to change state in you application
+	:setState is async code.
+	note: shouldn't modify state directly
+	note: setState() involve render()
+
+Update State
+	:setStates depens on previous state.
+	note: to update, use function parameters rather than just passing object.
+	eg.
+	wrong way
+	note: wrong because this.prop.counter will always have the original value, so running the code below will never
+		increment counter more than 1.
+	this.setstate({
+		counter: this.prop.counter + 1;
+	});
+
+	Correct way, using function parameters.
+	this.setState((prevState, props) => {
+		return {
+			counter: prevState.counter +1
+		};
+	});
+
+checkt state
+	:because setState is Asynchronous. console.log after setState will not print the correct state.
+	note: use callback function because callbackfunction will run after the method is run. (in this case, setState())
+	eg.
+	correct way
+	note: 
+	this.setState({name:"Tim"}, ()=> {
+		console.log(
+			"Now State is up to date",
+			this.state.name
+		);
+	});
+===============================================================================================
+React Component architecture
+eg.
+<const instructor = this.state.instructors.map
+===============================================================================================
+INSTALLATION
+
+:npm install -g create-react-app
+	> to create file with create-react-app, type "create-react-app *name*"
+	> to run the react app, in the *name* folder, type npm start
+===============================================================================================
+Note
+
+:React is used in different places, so Core component of react is separeated from the DOM component.

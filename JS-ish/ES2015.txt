@@ -1,0 +1,171 @@
+====================================================================================================
+QUESTION
+What is temporal dead zone?
+Ans 	let bindings are created at the top of the (block) scope containing the declaration, commonly referred to as "hoisting"
+	Unlike variables declared with var, which will start with the value undefined, let variables are not initialized until 
+	their definition is evaluated.
+	Accessing the variable before the initialization results in a ReferenceError. 
+	
+	note: The variable is in a "temporal dead zone" from the start of the block until the initialization is processed.
+
+What is first class function?
+Ans	passing functions as arguments to other functions or assigning them to variables
+
+What is JavaScript object literal?
+Ans 	A JavaScript object literal is a comma-separated list of name-value pairs wrapped in curly braces.
+	Object literals encapsulate data, enclosing it in a tidy package. 
+	This minimizes the use of global variables which can cause problems when combining code.
+
+	note: Similar to Dictionary in Python.
+====================================================================================================
+ES2015
+What to learn 
+:let, const
+:template strings
+:arrow functions
+:default parameters
+:rest and spread operators
+:for..of loops
+:object shorthand notation
+:computed property names
+:object destructuring
+:array destructuring
+:class keyword
+:super and extends keywords
+:Maps/Sets
+:Promises
+:Generators
+:Object, Number, Array methods
+====================================================================================================
+NOTE
+const
+	:allow us to create constants or values which can not be re-DECLARE
+	note: const "object" -> obj can be mutated but not declare again
+		eg. const numbers = [1,2,3,4];
+
+let
+	:The let statement declares a block scope local variable, optionally initializing it to a value.
+	note: cannot re-define a let keyword
+		eg.
+		use case for let
+		for(var i = 0; i<5 ; i++){
+			setTimeout(function(){
+				console.log(i)
+			},1000)
+		}
+		result: print 5 (5 times) instead of 0-4
+			This is because for finish runing before setTimeout so i was = 5 
+		
+		fix without using let
+		note: it used IIFE (immediately invoked function expression)
+		for(var i = 0; i<5 ; i++){
+			(function(j){
+				setTimeout(function(){
+					console.log(i)
+				},1000);
+			})(i)
+		}
+		result: print 0-4
+			This is fixed by creating another function inside to force to print 
+			value of i immediately after setTimeout is finished and passing 
+			a parameter of 'i' to that function.
+
+		use let
+		for(let i = 0; i<5 ; i++){
+			setTimeout(function(){
+				console.log(i)
+			},1000)
+		}
+		result: print 0-4
+			this is because it create 5 block scope, and console.log will only print
+			when setTimeout is finished because, with let, i was in TDZ, so it was not 
+			referenceable. 
+
+Hoisting
+	: variables defined using the "var" keyword will have their declaration lifted to the top of 
+	the scope that they are in
+		eg. 
+		Hositing with var
+		function helloInstructor(){
+			return elie;
+			var elie = "ME!";
+		}
+		above is the same as below
+		function helloInstructor(){ 
+			var elie; //Hositing
+			return elie; //function return undefined
+			elie = "ME!";
+		} 
+		
+		Hoisting with let
+		note: let does hoist, but we cannot access the value - it is in a TDZ (Temporal Dead Zone)
+		function helloInstructor(){
+			return elie;// ReferenceError
+			let elie = "ME!";
+		}
+		
+
+block scope(in js)
+	:include if for while do try catch
+
+Template Strings
+	:allows us to concat string inside one quotation.
+	:it also allow quotation with multiple line without using new line character ('\n')
+		eg.
+		console.log('Hello $(firstName) $(lastName)');
+		aboe is same as below
+		console.log("Hello" + " " + firstName + " " + lastName);
+	note: below option is much more error prone.
+
+Arrow Functions
+	:javascript version of lamba funciton in java
+	note: you can put arrow functions on one line, but you must omit the return keyword as well as curly braces. (same rule as lambda expression)
+	note: arrow function does not have its own "this" . its "this" is bound to the enclosing scope. 
+		eg. 
+		[1] use anonymous function ( no need to name a function)
+		var add = function(a,b){
+			return a+b;
+		}
+		
+		with arrow function	
+		var add = (a,b) => {
+			return a+b;
+		}
+
+		[2] "this" problem
+		class Logger {
+  			dumpData(data) {
+    				var _this = this;
+
+    				// this dumps data to a file and get the name of the file via a callback
+    				dump(data, function (outputFile) {
+      				_this.latestLog = outputFile;
+    				});
+  			}
+		}
+
+		using arrow functions
+		class Logger {
+  			dumpData(data) {
+   			 dump(data, outputFile => this.latestLog = outputFile);
+  			}
+		}
+		
+		[3] There is no arguments variable:
+		(function () {console.log(arguments)})(1, 2); // will output [1, 2]
+
+  		(() => console.log(arguments))(1, 2); // will raise ReferenceError: arguments is not defined
+
+		[4]Be careful when returning object literals
+		(() => {foo: 1})() // this will return undefined. 'foo: 1' is interpreted as a statement composed of a label and the literal 1
+  		
+		// the correct way should be wrapping it with parenthesis
+  		(() => ({foo: 1}))() // returns Object {foo: 1}
+
+		[5]An arguments keyword can be accessed if the arrow frunction is inside of another function (it will be the outer functions arguments)
+		function outer() {
+			return innerFunction = () => {	
+				return arugments;
+			}
+		}
+		outer(1)(2); //only prints out [1] // 1 is argument of outer function

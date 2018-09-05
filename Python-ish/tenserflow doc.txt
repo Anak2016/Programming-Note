@@ -1,0 +1,245 @@
+Question
+Q: What are properties of tf.Operation()?
+	Ans:
+		device, graph, input, name, node_def(returns the NodeDef representation), op_def(returns OpDef proto), output
+		traceback (returns the call stack from when this op was constructed), tracback_with_start_line, type.
+
+Q: What are properties of tensor in tensorflow?
+	Ans:
+		tf.Tensor has the following properties: data type, shape.
+
+Q: How to inspect output of dataset (types and shapes)?
+	Ans: 
+		eg.
+		dataset1 = tf.data.Dataset.from_tensor_slices(tf.random_uniform([4, 10]))
+		print(dataset1.output_types)  # ==> "tf.float32"
+		print(dataset1.output_shapes)  # ==> "(10,)"
+
+		Or you can give each element a name
+
+		dataset = tf.data.Dataset.from_tensor_slices(
+   			{"a": tf.random_uniform([4]),
+    			"b": tf.random_uniform([4, 100], maxval=100, dtype=tf.int32)})
+		print(dataset.output_types)  # ==> "{'a': tf.float32, 'b': tf.int32}"
+		print(dataset.output_shapes)  # ==> "{'a': (), 'b': (100,)}"
+
+Q: How to apply a function to each element?
+	Ans
+		the element structure determines the arguments of the function
+		dataset1 = dataset1.map(lambda x: ...)// function apply to x
+
+		dataset2 = dataset2.flat_map(lambda x, y: ...)// function apply to both x and y
+
+		# Note: Argument destructuring is not available in Python 3.
+		dataset3 = dataset3.filter(lambda x, (y, z): ...)
+
+Q: What are types of Iterator in dataset?
+	Ans
+		The tf.data API currently supports the following iterators, in increasing level of sophistication:
+			one-shot,
+			initializable,
+			reinitializable, and
+			feedable.
+Q: What is COCO API?
+	Ans
+		COCO is a large image dataset designed for object detection, segmentation, 
+		person keypoints detection, stuff segmentation, and caption generation. This package provides Matlab,
+		 Python, and Lua APIs that assists in loading, parsing, and visualizing the annotations in COCO.
+
+Q: Where is documentation in tensorflow/Model/Object detection?
+	Ans
+		g3doc folder contain documentation of tensorflow/Model/Object detection.
+
+Q: Window .config file.
+	Ans
+		Configuration files are XML file that can be changed as needed. Developerescan use configuration file to
+		change setting witout recompiling application. Administrators can use configuration files to set policies
+		that affect how aplications run on their computers.
+
+Q How does Checkpoint in tensorflow work?
+	Ans
+		:by default, 
+		note: 
+			: .ckpt file
+			: if don't specify model_dir, the Estimator writes checkpoint files to a temporary
+				directory chosen by Python tempfile.mkdtemp function
+				eg. /var/folders/0s/5q9kfzfj3gx2knj0vj8p68yc00dhcr/T/tmpYm1Rwa
+			: modify default by create RunConfig objs, and specify config when train.
+				eg. 	my_checkpointing_config = tf.estimator.RunConfig(
+   					save_checkpoints_secs = 20*60,  # Save checkpoints every 20 minutes.
+    					keep_checkpoint_max = 10)      # Retain the 10 most recent checkpoints.
+Q: How to restore variables form a Checkpoint?	
+	Ans 
+		trained model can be retored using tf.train.Saver() which restores variable from a checkpoint
+		note: it can also restore some variabls 
+			eg.
+				restorer = tf.train.Saver([v1,v2])// restore only var1 and var2	
+
+Q: What is Estimator in tensorflow?
+	Ans
+		note: 
+			:by default, the Estimator saves checkpoints in the model_dir.
+			:by default, it writes a checkpoint every 600 sec. (10min)
+			:by default, it writes a checkpoint when the train method start (First iteration) 
+				and completes (final iteration)
+			:by default, it retains only the 5 most recent cehckpoints in the directory.
+
+Q: How to loop throught hyper parameter?
+	Ans
+		We can use slim.stack() to stack up layer of the same pattern for example.
+
+Q: What is TFRecord used for?
+	Ans
+		it used with tf.data to easily import input data.
+
+Q: How to convert jpg or png to TFRecord?
+	Ans
+		read an image in tf format then convert it to binary and save it in TFRecord
+		linkhttps://stackoverflow.com/questions/33849617/how-do-i-convert-a-directory-of-jpeg-images-to-tfrecords-file-in-tensorflow
+
+Q: How to use already existed deep learning architecture?
+	Ans
+		:data must be imported by eg. tf.data.Dataset.from_tensor_slices() or in TFRecord format
+		:use "ANYMODEL".config file (can be modified anyway we want)
+		:download the same ANYMODEL.tar file which must include graph and checkpoint.(module of Protocal Buffer)
+		:check directory, file, code and you should be ready to go.
+
+Q: Which GPU platform should i use?
+	Ans 
+		sentdex recommends Paperspace
+
+Q: What is min_after_dequeu and capacity?
+	Ans 
+		# min_after_dequeue defines how big a buffer we will randomly sample
+  		#   from -- bigger means better shuffling but slower start up and more
+  		#   memory used.
+  		# capacity must be larger than min_after_dequeue and the amount larger
+  		#   determines the maximum we will prefetch.  Recommendation:
+ 		#   min_after_dequeue + (num_threads + a small safety margin) * batch_size
+	link on reading data:https://www.tensorflow.org/api_guides/python/reading_data
+
+#########################################################################################
+TensorFlow Vocab
+
+tf.gfile()
+	:IMports for Python API
+tf.gfile().GFile
+	:File I/O wrappers without thread locking
+tf.gfile().GFile().read()
+	:return the content of a file as a string
+tf.GraphDef.ParseFromString(self, serialized)
+	:Parse serialized protocol buffer data into message that has been assigned.
+tf.import_graph_def
+	:imports the graph from 'graph_df' into the current default 'Graph'
+tf.squeeze()
+	:removes dimensions of size 1 from the shape of tensor
+var.output_types
+	:return type of variable
+var.output_shapes
+	:return shape of variabel
+============================================================================================
+TENSORBOARD
+
+python C:\Users\Anak\Anaconda3\envs\tensorflow\Lib\site-packages\tensorboard\main.py --logdir=./logs
+	>run tensorboard in Keras.
+	>it has to be run directly from main.py containing tensorboard code
+	
+tensorboard --logdir=path/to/log-directory
+	>run tensorboard in tensorflow
+
+tensorboard --inspect --logdir=./logs
+	>inspect passed in data in real time
+##########################################################################################
+Guide to TensorFlow Moduel Files
+	:this guide tries to explain some of the details of how you can work with the main files 
+	that hold model data, to make it easier ot develop those kind of tools
+
+	PROTOCOL BUFFERS (also refered as 'ProtoBuf')
+		:All of TensorFlow's file formats are based on Protocol Buffers
+		:The summary is that you define data structures in text files, and the protobuf tools
+		 generate classes in C, Python, and other languages that can load, save, and access the
+		 data in a friendly way. 
+
+	GraphDef
+		:After you've created a Graph object, you can save it out by calling "as_graph_def()"
+		which returns a GraphDef obj.
+		:The GraphDef class is an obj created by the ProtoBuf
+		:The protobuf tools parse this text file, and generate the code to load, store, and manipulate graph definitions.
+		
+		note:
+			:If you see a standalone TensorFlow file represneting a model, it's likely to contain a seralized version
+			of one of these GraphDef objects saved out by the protobuf code. 
+		example:
+		 graph_def = graph_pb2.GraphDef() // create empty GraphDef obj
+		 with open(FLAGS.graph, "rb") as f:
+			if FLAGS.input_binary:
+				graph_def.ParseFromStrong(f.read())
+			else:
+				text_format.Merge(f.read(), graph_def) 
+	NODES
+		:Each Node is a 'NodeDef' Obj contained within graph.
+		:Each one defining a single operation along with its input connections.
+		:Members of NodeDef includes following: 
+				name (name of unique node), op(name of operation), input, device (GPU or CPU), 
+				attr (permanent properties of node,  things that don't change at runtime such as the size of filter for convolutions, or the value of constant ops.
+	FREEZING
+		:takes a graph definition and a set of checkpoints and freezes them into a single file (merge into 1 file)
+		:It load the GraphDef, pull in the values for all the variables from the lastest checkpoint file, and then
+		replace each Variable op with a Const. It then strips away all the node that aren't used for forward inference
+		and saves out the resulting GraphDef into the output file
+			note:
+				:weight usually aren't stored inside the file format during training, but are held in separate checkpoint files.
+				and there are 'Variable' ops in the graph that load the lates values when they're initialzied. 
+	WEIGHT FORMATS	
+		: In TensorFlow, the filter weights for the Conv2D operation are stored on the second input, and are expected to be in the order [filter_height, filter_width, input_depth, output_depth],	
+
+##########################################################################################
+Note:
+
+IMPORTING DATA	
+	:tf.data API (use pipeline) helps randomized img, merged img into batch file, and converting them to embedding identifiers with a lookup table, and batching together sequence of different lengths.
+	:tf.data API introduces two new abtractions to TensorFlow: tf.data.Dataset, and tf.data.Iterator
+		>tf.data.Dataset represents a sequence of elements which each elements contains one or more Tensor objs eg. element is img data and a label
+			-2 ways to create a dataset: 
+				+creating a source (by construct dataset from tf.Tensor objs eg. Dataset.from_tensor_slices())
+				+Applying transformation (e.g. Dataset.batch())
+					constructs a dataset from one or more tf.data.Dataset objects.	
+		>tf.data.Iterator provides the main way to extract elements from a dataset. The operation returned by Iterator.get_next() yields the next element of a Dataset when executed, 
+		and typically acts as the interface between input pipeline code and your model. 
+	:To use input pipline, there are 2 ways
+		> contruct a DAtaset from sone tensor in memory (eg tf.data.Dataset.from_tensor())
+		> if its in the right format ,TFRecord format, you can construct a tf.data.TFRecordDataset.
+
+	note: 
+		:an element can contain one or more tf.Tensor objects, called components.
+		:each component has tf.Dtype and tf.TensorShape
+		:Dataset.output_types and Dataset.output_shapes properties allow you to inspect the inferred types and shapes of each component of a dataset element.
+
+	ITERATOR	
+		:in incresing lv of sophisitication one-shot, initializable, reinitializable, and feedable.
+	
+	CONSUMING TFRecord DATA
+		:the TFRecord file format is a simple record-oriented binary format that many TensorFlow applications use for training data.
+		:It can be used to process large datasets taht donot fit in memory
+		:The tf.data.TFRecordDataset class enables you to stream over the contents of one or more TFRecord files as part of an input pipeline.
+			eg 
+				filenames = ["/var/data/file1.tfrecord", "/var/data/file2.tfrecord"]
+				dataset = tf.data.TFRecordDataset(filenames)
+		:The filenames argument to the TFRecordDataset initializer can either be a string, a list of strings, or a tf.Tensor of strings.
+		Therefore if you have two sets of files for training and validation purposes, you can use a tf.placeholder(tf.string) to represent 
+		the filenames, and initialize an iterator from the appropriate filenames:
+
+	
+TF-Slim (only include pretrain and evalution tools. NOT INCLUDING converting standard dataset to TFRecord.) 
+	:TF-slim is a new lightweight high-level API of TensorFlow (tensorflow.contrib.slim) for defining, training and evaluating complex models. 
+		>has serveral widely used computer vision model eg. VGG, AlexNet
+		>These can be used as black boxes, or can be extended in various way eg. by adding "multiple heads" to different internal layers. 
+	:It removes boilerplate code and use argument scoping (used for scoping layers arguments) to get high level layers, and variables. This increase readability and maintainability, 
+		reduce likelyhood of an error from copy-and-pasting hyperparameter values and simplifies hyperparameter tuning.
+	
+	:Any dataset can be used to train.
+	
+	:Components of TF-Slim includes
+		> arg_scope, data,evaluation, layers, learning, losses, nets, queues, regularizers, variables.
+
+ 

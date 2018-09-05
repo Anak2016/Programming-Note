@@ -1,0 +1,14 @@
+VOCAB 
+
+express.static(root,[options])
+	:It is a built-in middle function in Express.
+	:The root argument specifies the root directory from which to serve static assets. 
+	The function determines the file to serve by combining req.url with the provided root directory.
+
+express.set(valName, val)
+	:set val to valName
+	:This is because you may need to retrieve the valName later
+
+express.use(<specific_middleware_layer_here>)
+	:it is used to set up middle ware to specific route( which can be any route )to middleware stack (app.stack)
+	link:https://stackoverflow.com/questions/11321635/nodejs-express-what-is-app-use
